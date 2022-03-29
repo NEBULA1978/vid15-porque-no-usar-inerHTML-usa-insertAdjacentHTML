@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>El problema de innerHTML</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<style type="text/css">
+	*{
+		font-family: 'Montserrat', sans-serif;
+	}
+	input{		
+		padding:3px 6px;
+		outline:none;
+		margin-bottom:10px;
+		border:1px solid orangered;
+	}
+	div{
+		color:orangered;
+	}
+	button{
+		padding:3px 10px;
+	}
+	main{
+		width:270px;
+		height:325px;
+		border:1px solid orangered;
+		border-radius:6px;
+		padding:20px;
+		position:absolute;
+		top:0;
+		bottom:0;
+		left:0;
+		right:0;
+		margin:auto;
+	}
+</style>
+<script type="text/javascript">
+	window.onload=inicio;
+	
+	function inicio(){
+		document.querySelector("button").onclick=lista;
+		document.querySelector("#nombre").onkeydown=teclado;
+	}
+	function teclado(parametro){
+		let codigoDeTecla=parametro.keyCode;
+		if (codigoDeTecla==13){
+			lista();
+		}
+	}
+	function lista(){
+		let nombre=document.querySelector("#nombre").value.trim();
+		let nombre_mejorado=(nombre.substr(0,1)).toUpperCase()+(nombre.substr(1)).toLowerCase();
+		if (nombre.length>0){
+			document.querySelector("#caja").insertAdjacentHTML('beforeend',`<div>${nombre_mejorado}</div>`);	
+		}
+		document.querySelector("#nombre").focus();
+		document.querySelector("#nombre").value="";		
+	}
+</script>
+</head>
+<body>
+	<main>
+		<div id="caja">
+			<input id="nombre" placeholder="Escribe tu nombre" spellcheck="false" autofocus>
+			<button>Aceptar</button>
+		</div>
+	</main>
+</body>
